@@ -20,6 +20,9 @@ useradd -r -d /opt/gvm -c "GVM (OpenVAS) User" -s /bin/bash gvm
 mkdir /opt/gvm
 chown gvm:gvm /opt/gvm
 apt-get -y install gcc g++ make bison flex libksba-dev curl redis libpcap-dev cmake git pkg-config libglib2.0-dev libgpgme-dev libgnutls28-dev uuid-dev libssh-gcrypt-dev libldap2-dev gnutls-bin libmicrohttpd-dev libhiredis-dev zlib1g-dev libxml2-dev libradcli-dev clang-format libldap2-dev doxygen nmap gcc-mingw-w64 xml-twig-tools libical-dev perl-base heimdal-dev libpopt-dev libsnmp-dev python3-setuptools python3-paramiko python3-lxml python3-defusedxml python3-dev gettext python3-polib xmltoman python3-pip texlive-fonts-recommended xsltproc texlive-latex-extra --no-install-recommends
+apt-get -y install python-netsnmp python-impacket gcc pkg-config libssh-gcrypt-dev libgnutls28-dev libglib2.0-dev libpcap-dev libgpgme-dev bison libksba-dev libsnmp-dev libgcrypt20-dev redis-server
+apt-get -y install gcc cmake libglib2.0-dev libgnutls28-dev libpq-dev postgresql-server-dev-11 pkg-config libical-dev
+apt-get -y install libmicrohttpd-dev libxml2-dev
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt-get update
@@ -36,13 +39,13 @@ sed -i 's/\"$/\:\/opt\/gvm\/bin\:\/opt\/gvm\/sbin\:\/opt\/gvm\/\.local\/bin\"/g'
 echo "/opt/gvm/lib" > /etc/ld.so.conf.d/gvm.conf
 sudo -Hiu gvm mkdir /tmp/gvm-source
 cd /tmp/gvm-source
-sudo -Hiu gvm git clone -b gvm-libs-11.0 https://github.com/greenbone/gvm-libs.git
+sudo -Hiu gvm git clone -b gvm-libs-20.08 https://github.com/greenbone/gvm-libs.git
 sudo -Hiu gvm git clone https://github.com/greenbone/openvas-smb.git
-sudo -Hiu gvm git clone -b openvas-7.0 https://github.com/greenbone/openvas.git
-sudo -Hiu gvm git clone -b ospd-2.0 https://github.com/greenbone/ospd.git
-sudo -Hiu gvm git clone -b ospd-openvas-1.0 https://github.com/greenbone/ospd-openvas.git
-sudo -Hiu gvm git clone -b gvmd-9.0 https://github.com/greenbone/gvmd.git
-sudo -Hiu gvm git clone -b gsa-9.0 https://github.com/greenbone/gsa.git
+sudo -Hiu gvm git clone -b openvas-20.08 https://github.com/greenbone/openvas.git
+sudo -Hiu gvm git clone -b ospd-20.08 https://github.com/greenbone/ospd.git
+sudo -Hiu gvm git clone -b ospd-openvas-20.08 https://github.com/greenbone/ospd-openvas.git
+sudo -Hiu gvm git clone -b gvmd-20.08 https://github.com/greenbone/gvmd.git
+sudo -Hiu gvm git clone -b gsa-20.08 https://github.com/greenbone/gsa.git
 sudo -Hiu gvm cp --recursive /opt/gvm/* /tmp/gvm-source/
 sudo -Hiu gvm touch /opt/gvm/.bashrc
 sudo -Hiu gvm mv /opt/gvm/.bashrc /opt/gvm/.bashrc.bak # save original bashrc file 
